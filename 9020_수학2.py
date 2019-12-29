@@ -1,34 +1,31 @@
-import sys
+# import sys
 
-t = int(sys.stdin.readline())
+# t = int(sys.stdin.readline())
 
-for _ in range(t):
-    n = int(sys.stdin.readline())
-    boolList = [True] * n
-    for i in range(2, int(n**0.5)+1):
-        if boolList[i] == True:
-            for j in range(2*i, n, i):
-                boolList[j] = False
-    primeList = [i for i in range(2, len(boolList)) if boolList[i] == True]
+# for _ in range(t):
+#     n = int(sys.stdin.readline())
+#     boolList = [True] * n
+#     for i in range(2, int(n**0.5)+1):
+#         if boolList[i] == True:
+#             for j in range(2*i, n, i):
+#                 boolList[j] = False
+#     primeList = [i for i in range(2, len(boolList)) if boolList[i] == True]
 
-    m = int(len(primeList)/2)-1
+#     m = int(len(primeList)/2)-1
 
-    x = primeList[m]
-    y = n - x
+#     x = primeList[m]
+#     y = n - x
 
-    if n == 6:
-        print("3 3")
-    else:
-        while True:
-            if y in primeList:
-                print("{} {}".format(x, y))
-                break
-            else:
-                x = primeList[m-1]        
-                y = n-x
-
-
-
+#     if n == 6:
+#         print("3 3")
+#     else:
+#         while True:
+#             if y in primeList:
+#                 print("{} {}".format(x, y))
+#                 break
+#             else:
+#                 x = primeList[m-1]        
+#                 y = n-x
 
 
 # n보다 작은 소수 다 출력해놓고
