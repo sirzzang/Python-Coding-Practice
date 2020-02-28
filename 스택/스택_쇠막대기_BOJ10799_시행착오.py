@@ -26,6 +26,7 @@
 
 # L 들어올 때, stack이 비어 있는지 검사하고, 안 비어 있다면(왼쪽 괄호가 하나라도 나왔다는 말이므로), 왼쪽 괄호만 나왔다면 초기화하도록!
 # 현재 레이저는, 반드시 오른쪽 괄호가 나오고 난 뒤나, 오른쪽 괄호가 나오지 않았다면 가장 최근에 나온 왼쪽 괄호의 경우에만 + 해야 함.
+
 import sys
 stick_input = sys.stdin.readline().strip('\n')
 sticks = stick_input.replace("()", "L") # ()를 laser로 변환
@@ -74,57 +75,56 @@ print(stick_pieces)
 # 아우 시댕...........................
 # L 받을 때 왼쪽 괄호 있으면 현재 레이저 개수 초기화해야 한다.
 
-# stick_input = input()
-# sticks = stick_input.replace("()", "L")
-# print(sticks)
+stick_input = input()
+sticks = stick_input.replace("()", "L")
+print(sticks)
 
-# stack = []
-# laser_cum = 0 # 누적 레이저 개수
-# laser_cur = 0 # 현재 레이저 개수
-# stick_pieces = 0
+stack = []
+laser_cum = 0 # 누적 레이저 개수
+laser_cur = 0 # 현재 레이저 개수
+stick_pieces = 0
 
-# for i in range(len(sticks)):
+for i in range(len(sticks)):
     
-#     print(f"{i}번째 loop")
+    print(f"{i}번째 loop")
 
-#     if sticks[i] == "(":
-#         stack.append(sticks[i])
-#         print(f"{i}번째 stack은 {stack}")
-#         print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
-#         print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
-#         print(f"{i}번째 stick 개수는 {stick_pieces}")
+    if sticks[i] == "(":
+        stack.append(sticks[i])
+        print(f"{i}번째 stack은 {stack}")
+        print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
+        print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
+        print(f"{i}번째 stick 개수는 {stick_pieces}")
     
-#     elif sticks[i] == "L":
-#         if len(stack) != 0:
-#             laser_cum += 1 # 누적 레이저 개수 올리기
-#             if sticks[i-1] != ")":
-#                 laser_cur += 1 # 현재 레이저 개수 올리기
-#         print(f"{i}번째 stack은 {stack}")
-#         print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
-#         print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
-#         print(f"{i}번째 stick 개수는 {stick_pieces}")
+    elif sticks[i] == "L":
+        if len(stack) != 0:
+            laser_cum += 1 # 누적 레이저 개수 올리기
+            if sticks[i-1] != ")":
+                laser_cur += 1 # 현재 레이저 개수 올리기
+        print(f"{i}번째 stack은 {stack}")
+        print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
+        print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
+        print(f"{i}번째 stick 개수는 {stick_pieces}")
     
-#     else: # 오른쪽 괄호 들어오는 경우
-#         if laser_cur == 0:
-#             stick_pieces += (laser_cum + 1)
-#             stack.pop()
-#             print(f"{i}번째 stack은 {stack}")
-#             print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
-#             print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
-#             print(f"{i}번째 stick 개수는 {stick_pieces}")
-#         else:
-#             stick_pieces += (laser_cur + 1)
-#             stack.pop()
-#             if len(stack) == 0:
-#                 laser_cum = 0
-#                 laser_cur = 0
-#             print(f"{i}번째 stack은 {stack}")
-#             print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
-#             print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
-#             print(f"{i}번째 stick 개수는 {stick_pieces}")
+    else: # 오른쪽 괄호 들어오는 경우
+        if laser_cur == 0:
+            stick_pieces += (laser_cum + 1)
+            stack.pop()
+            print(f"{i}번째 stack은 {stack}")
+            print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
+            print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
+            print(f"{i}번째 stick 개수는 {stick_pieces}")
+        else:
+            stick_pieces += (laser_cur + 1)
+            stack.pop()
+            if len(stack) == 0:
+                laser_cum = 0
+                laser_cur = 0
+            print(f"{i}번째 stack은 {stack}")
+            print(f"{i}번째 누적 레이저 개수는 {laser_cum}")
+            print(f"{i}번째 현재 레이저 개수는 {laser_cur}")
+            print(f"{i}번째 stick 개수는 {stick_pieces}")
 
-# print(stick_pieces)
-
+print(stick_pieces)
 
 # 코드 3
 # 누적 레이저와 현재 레이저의 수로 생각해본다.
@@ -135,41 +135,40 @@ print(stick_pieces)
 # 이렇게 짜니까 14
 # 단계별로 뜯어보니까, 현재 레이저가 0이라는 조건이 붙을 경우에만 누적 레이저 절단 개수를 더하므로, L((L))(L)에서 '(LL)(L)'을 빼버리고 난 뒤의 ')L' 이 부분이 문제가 된다.
 
-# stick_input = input()
-# sticks = stick_input.replace("()", "L")
-# print(sticks)
+stick_input = input()
+sticks = stick_input.replace("()", "L")
+print(sticks)
 
-# stack = []
-# laser_cum = 0 # 누적 레이저 개수
-# laser_cur = 0 # 현재 레이저 개수
-# stick_pieces = 0
+stack = []
+laser_cum = 0 # 누적 레이저 개수
+laser_cur = 0 # 현재 레이저 개수
+stick_pieces = 0
 
 
-# for i in range(len(sticks)):
+for i in range(len(sticks)):
     
-#     if sticks[i] == "(":
-#         stack.append(sticks[i])
+    if sticks[i] == "(":
+        stack.append(sticks[i])
 
-#     elif sticks[i] == "L":
-#         if len(stack) != 0:
-#             laser_cum += 1 # 누적 레이저 개수 올리기
-#             laser_cur += 1 # 현재 레이저 개수 올리기
+    elif sticks[i] == "L":
+        if len(stack) != 0:
+            laser_cum += 1 # 누적 레이저 개수 올리기
+            laser_cur += 1 # 현재 레이저 개수 올리기
     
-#     else: # 오른쪽 괄호 들어오는 경우
-#         if laser_cur == 0:
-#             stick_pieces += (laser_cum + 1)
-#         else:
-#             if len(stack) == 0:
-#                 laser_cum == 0
-#                 laser_cur == 0
+    else: # 오른쪽 괄호 들어오는 경우
+        if laser_cur == 0:
+            stick_pieces += (laser_cum + 1)
+        else:
+            if len(stack) == 0:
+                laser_cum == 0
+                laser_cur == 0
 
-#             else:
-#                 stick_pieces += (laser_cur + 1)
-#                 stack.pop()
-#                 laser_cur = 0
+            else:
+                stick_pieces += (laser_cur + 1)
+                stack.pop()
+                laser_cur = 0
 
-# print(stick_pieces)
-
+print(stick_pieces)
 
 # 코드 2
 # laser 개수로 바꾸기는 했는데, 이것도 여전히 문제가 있다.
@@ -178,32 +177,32 @@ print(stick_pieces)
 # 레이저 개수를 누적 레이저 개수와, 현재 레이저 개수로 나눠야 하지 않을까?
 # 그리고, 애초에 누적 레이저 0일 경우를 생각해주지 않아도 된다! -> 일단 오른쪽 괄호가 남아 있다면, L을 다 바꾸고 남은 걸테니까 L이 반드시 있을 수밖에 없다!
 
-# stick_input = input()
-# sticks = stick_input.replace("()", "L")
+stick_input = input()
+sticks = stick_input.replace("()", "L")
 
-# stack = []
-# laser_cnt = 0
-# stick_pieces = 0
+stack = []
+laser_cnt = 0
+stick_pieces = 0
 
-# for i in range(len(sticks)):
+for i in range(len(sticks)):
 
-#     if sticks[i] == "(":
-#         stack.append(sticks[i])
+    if sticks[i] == "(":
+        stack.append(sticks[i])
 
-#     elif sticks[i] == "L":
-#         if len(stack) != 0:
-#             laser_cnt += 1
+    elif sticks[i] == "L":
+        if len(stack) != 0:
+            laser_cnt += 1
 
-#     else:
-#         if laser_cnt == 0: # 레이저가 없으면
-#             stack.pop()
+    else:
+        if laser_cnt == 0: # 레이저가 없으면
+            stack.pop()
 
-#         else: # 레이저가 있으면
-#             stick_pieces += (laser_cnt +1)
-#             stack.pop()
+        else: # 레이저가 있으면
+            stick_pieces += (laser_cnt +1)
+            stack.pop()
     
-#     if len(stack) == 0:
-#         laser_cnt = 0
+    if len(stack) == 0:
+        laser_cnt = 0
 
 # 코드 1
 # laser 구현까지는 됐는데, 나중에 출력하니까 조각의 개수가 0이 나온다.
@@ -211,34 +210,30 @@ print(stick_pieces)
 # else 부분에서, 막대 개수를 더해주는 게 안 된다.
 # 당연하다! stack에 laser을 안 받았으니까!!!!!!
 
-# stick_input = input()
-# sticks = stick_input.replace("()", "L")
-# print(sticks)
+stick_input = input()
+sticks = stick_input.replace("()", "L")
+print(sticks)
 
-# stack = []
-# laser_cnt = 0
-# stick_pieces = 0
+stack = []
+laser_cnt = 0
+stick_pieces = 0
 
-# for i in range(len(sticks)):
+for i in range(len(sticks)):
 
-#     if sticks[i] == "(":
-#         stack.append(sticks[i])
+    if sticks[i] == "(":
+        stack.append(sticks[i])
 
-#     elif sticks[i] == "L":
-#         if len(stack) != 0:
-#             laser_cnt += 1
+    elif sticks[i] == "L":
+        if len(stack) != 0:
+            laser_cnt += 1
 
-#     else:
-#         if stack[-1] != "L": # 레이저가 없으면
-#             stack.pop()
+    else:
+        if stack[-1] != "L": # 레이저가 없으면
+            stack.pop()
 
-#         else: # 레이저가 있으면
-#             stick_pieces += (laser_cnt +1)
-#             stack.pop()
+        else: # 레이저가 있으면
+            stick_pieces += (laser_cnt +1)
+            stack.pop()
     
-#     if len(stack) == 0:
-#         laser_cnt = 0
-
-                
-            
-
+    if len(stack) == 0:
+        laser_cnt = 0
