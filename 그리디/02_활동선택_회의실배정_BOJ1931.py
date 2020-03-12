@@ -13,6 +13,19 @@ timetable = sorted([list(map(int, input().split(' '))) for _ in range(t)], key =
 
 print(greedy_meeting(timetable))
 
+# for문으로 구현
+t = int(input())
+timetable = sorted([list(map(int, input().split(' '))) for _ in range(t)], key = lambda x: (x[-1], x[0]))
+
+cnt = 0
+end = 0
+
+for time in timetable :
+    if time[0] >= end:
+        end = time[-1]
+        cnt += 1
+        
+print(cnt)
 
 # timetable 미리 정의 안하면 런타임에러 뜬다.
 # 시간초과
