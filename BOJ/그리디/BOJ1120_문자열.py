@@ -12,4 +12,5 @@ for i in range(len(b)-len(a)+1):
     if diff_cnt < answer:
         answer = diff_cnt
 
+
 print(answer)
