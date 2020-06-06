@@ -21,9 +21,12 @@ def fibo_dp_1(n): # 1은 0, 1로 시작하는 피보나치 수열.
             memo[i] = memo[i-1] + memo[i-2]
         print(f"1 호출 횟수 : {memo}")
         return memo[n]
+#
+#
+# T = int(input())
+# for _ in range(T):
+#     N = int(input())
+#     print(f"{fibo_dp_0(N)} {fibo_dp_1(N)}")
 
-
-T = int(input())
-for _ in range(T):
-    N = int(input())
-    print(f"{fibo_dp_0(N)} {fibo_dp_1(N)}")
+for i in range(5):
+    print(" ".join(["*"]*(i+1)).center(10, ' '))

@@ -13,18 +13,133 @@
 # 제한사항
 # n은 15 이하의 자연수 입니다.
 
-answer = []
+# answer = []
+#
+# def Hanoi(n, start, end, mid):
+#     global answer
+#     if n == 1:
+#         answer.append([start, end])
+#         return
+#     else:
+#         Hanoi(n-1, start, mid, end)
+#         answer.append([start, end])
+#         Hanoi(n-1, mid, end, start)
+#
+# def solution(n):
+#     Hanoi(n, 1, 3, 2)
+#     return answer
 
-def Hanoi(n, start, end, mid):
-    global answer
-    if n == 1:
-        answer.append([start, end])
-        return
+
+# Q_02. 기지국
+
+# Q_03. N, 사칙연산
+
+# x테스트 5만 실패
+
+from itertools import product
+
+def ops(a, b):
+    return set(item for item in [a+b, a-b, a*b, a//b] if item > 0)
+
+def check(container, n, number, order):
+
+    # result 내에서 다른 애들과
+    for x, y in product(container, repeat=2):
+        if number in ops(x, y):
+            return order*2
+
+    # result와 N들과의 애들에서
+    for c in container:
+        if number in ops(n, c) or number in ops(c, n):
+            return order
+
+    return False
+
+
+def solution(N, number):
+
+    if number in [int(str(N)*i) for i in range(1, 8)]:
+        return len(str(number))
+
     else:
-        Hanoi(n-1, start, mid, end)
-        answer.append([start, end])
-        Hanoi(n-1, mid, end, start)
-    
-def solution(n):
-    Hanoi(n, 1, 3, 2)    
-    return answer
+        if number % (11*N) == 0:
+            return len(str(number))
+
+        counts = set()
+        result_set = {N}
+
+        for i in range(7):
+            print(f"{N}을 {i+2}번 사용합니다.")
+            print(f"현재 result set : {result_set}")
+
+            temp_set = set()
+
+            if check(result_set, N, number):
+                print("위에서 일치하는 결과를 발견했습니다.")
+                counts.add(i+2)
+
+            else:
+                for result in result_set:
+                    temp_set.update(ops(N, result))
+                    temp_set.update(ops(result, N))
+                for x, y in product(result_set, repeat=2):
+                    temp_set.update(ops(x, y))
+
+            print(temp_set)
+
+            for t in temp_set:
+                for j in range(6-i):
+                    # print(int(str(N) * (j + 1)))
+                    if number in ops(int(str(N) * (j + 1)), t) or number in ops(t, int(str(N) * (j + 1))):
+                        print(ops(int(str(N) * (j + 1)), t), ops(int(str(N) * (j + 1)), t))
+                        print("아래서 일치하는 결과를 발견했습니다.")
+                        counts.add(i+j+3)
+
+
+            temp_set.add(int(str(N) * (i+2)))
+            print(temp_set)
+
+            result_set = temp_set # 업데이트
+
+        if counts:
+            return min(counts)
+        else:
+            return -1
+
+
+
+
+
+N = int(input())
+number = int(input())
+print(solution(N, number))
+
+
+
+#  = int(input())
+#         number = int(input())
+#
+#         print(ops(N, N))
+#
+#
+#
+#
+#         #
+#         # else:
+#         #     print(-1)
+#         #
+#         #
+#         # # print("이어붙이기 결과")
+#         #
+#         # temp_set.add(11*N)
+#         # #     print(result, [ops[op](result, N) for op in ops])
+#         # #     temp.extend([ops[op](result, N) for op in ops])
+#         # #
+#         # # print(temp)
+#         # result_set = temp_set
+#         # print(result_set)
+#
+#
+#
+# #
+# print(int('1111'))
