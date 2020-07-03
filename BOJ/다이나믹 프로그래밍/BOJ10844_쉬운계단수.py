@@ -20,7 +20,6 @@ for i in range(2, N + 1):
 print(sum(dp[N]) % 1000000000)
 
 ############# copy 여부 주의합시다 #############################
-
 from copy import deepcopy
 
 dp = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]*10 # 초기값 설정
@@ -31,14 +30,14 @@ for d in dp:
     print(id(d), id(d[0]))
 
 dp_copy = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0][:] for _ in range(10)] # 초기값 설정
-dp_copy[1] = [100, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+dp_copy[1] = [200, 100, 1, 1, 1, 1, 1, 1, 1, 1]
 print("==================== copy 했을 때 ====================")
 print(dp_copy)
 for d in dp_copy:
     print(id(d), id(d[0]))
 
 dp_deepcopy = [deepcopy([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) for _ in range(10)] # 초기값 설정
-dp_deepcopy[1] = [100, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+dp_deepcopy[1] = [100, 400, 1, 1, 1, 1, 1, 1, 1, 1]
 print("==================== deepcopy 했을 때 ====================")
 print(dp_deepcopy)
 for d in dp_deepcopy:
