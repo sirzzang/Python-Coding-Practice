@@ -1,3 +1,7 @@
+# ignore 폴더, 파일
+.idea/
+
+
 # Created by https://www.gitignore.io/api/venv
 # Edit at https://www.gitignore.io/?templates=venv
 
