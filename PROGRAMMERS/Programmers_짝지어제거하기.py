@@ -85,4 +85,21 @@ def solution(s):
     is_duplicate(s, pattern)
     return 1
 
- 
+'''
+def change_duplicates(s):
+    duplicates = ['aa', 'bb', 'cc', 'dd', 'ee', 'ff', 'gg', 'hh', 'ii', 'jj', 'kk', 'll', 'mm', 'nn', 'oo', 'pp',
+                 'qq', 'rr', 'ss', 'tt', 'uu', 'vv', 'ww', 'xx', 'yy', 'zz']
+    for dup in duplicates:
+        if dup in s:
+            return s.replace(dup, '')
+    return False
+        
+def solution(s):
+    print(s)
+    while s:
+        s = change_duplicates(s)
+        if not s:
+            return 0
+    if len(s) == 0:
+        return 1
+'''
